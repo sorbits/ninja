@@ -5,7 +5,6 @@
   <style>
 body {
   font-family: sans-serif;
-  font-size: 0.8em;
   margin: 5ex 10ex;
 }
 tt, pre {
@@ -14,10 +13,10 @@ tt, pre {
 #content {
   float: left;
   max-width: 60ex;
+  margin-right: 5ex;
 }
 #sidebar {
   float: left;
-  margin-left: 5ex;
   max-width: 20ex;
 }
 h1 {
@@ -54,10 +53,10 @@ Chrome browser on Linux (the motivating project behind Ninja), Ninja
 is under a second for a no-op build where the equivalent Makefiles
 took over ten seconds.</p>
 
-<p>Ninja's low-level approach makes it perfect for embedding in into
+<p>Ninja's low-level approach makes it perfect for embedding into
 more featureful build systems.
 Via <a href="http://code.google.com/p/gyp/">gyp</a> it can build
-Chrome (and v8 and WebKit etc.);
+Chrome and v8 and node.js etc.;
 via <a href="http://www.cmake.org/">CMake</a> it can build LLVM and
 KDE and Blender etc.</p>
 
