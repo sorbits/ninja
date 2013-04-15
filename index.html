@@ -12,7 +12,7 @@ tt, pre {
 }
 #content {
   float: left;
-  max-width: 60ex;
+  max-width: 65ex;
   margin-right: 5ex;
 }
 #sidebar {
@@ -65,14 +65,25 @@ extensive manual for more</a>: philosophical background, whether and
 how you can use Ninja for your project, platform support, and details
 about the language semantics.</p>
 
+<h2>What's new</h2>
+
+<p>The last Ninja release is <b>v1.2.0</b>, released 5 April 2013.
+  <a href="https://groups.google.com/d/msg/ninja-build/m3Ftf0iBLI8/E6yCYwNpnDYJ">Read the release notes</a>.
+
 <h2>Getting Ninja</h2>
 
-<pre>$ git clone git://github.com/martine/ninja.git
-$ cat ninja/README</pre>
+<pre>$ git clone git://github.com/martine/ninja.git && cd ninja
+$ git checkout release
+$ cat README</pre>
 
-<h2>Installing via <a href="http://macports.org">MacPorts</a></h2>
-
-<pre>$ sudo port install ninja</pre>
+<p>Or install from automated systems (<em>warning: frequently out of
+date</em>):</p>
+<dl>
+  <dt>Arch</dt> <dd><a href='https://aur.archlinux.org/packages/ninja/'>See AUR</a>.</dd>
+  <dt>Debian/Ubuntu</dt> <dd><tt>$ apt-get install ninja-build</tt></dd>
+  <dt>MacPorts</dt> <dd><tt>$ port install ninja</tt></dd>
+  <dt>HomeBrew</dt> <dd><tt>$ brew install ninja</tt></dd>
+</dl>
 
 </div>
 
