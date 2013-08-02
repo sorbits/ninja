@@ -197,6 +197,7 @@ struct BuildStatus {
   explicit BuildStatus(const BuildConfig& config);
   void PlanHasTotalEdges(int total);
   void BuildEdgeStarted(Edge* edge);
+  void PrintBuildEdgeStatus();
   void BuildEdgeFinished(Edge* edge, bool success, const string& output,
                          int* start_time, int* end_time);
   void BuildFinished();
@@ -220,6 +221,7 @@ struct BuildStatus {
   /// Map of running edge to time the edge started running.
   typedef map<Edge*, int> RunningEdgeMap;
   RunningEdgeMap running_edges_;
+  Edge* last_edge_status_;
 
   /// Prints progress output.
   LinePrinter printer_;

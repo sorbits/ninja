@@ -75,6 +75,7 @@ BuildStatus::BuildStatus(const BuildConfig& config)
     : config_(config),
       start_time_millis_(GetTimeMillis()),
       started_edges_(0), finished_edges_(0), total_edges_(0),
+      last_edge_status_(0),
       progress_status_format_(NULL),
       overall_rate_(), current_rate_(config.parallelism) {
 
@@ -99,6 +100,15 @@ void BuildStatus::BuildEdgeStarted(Edge* edge) {
   PrintStatus(edge);
 }
 
+void BuildStatus::PrintBuildEdgeStatus() {
+  if (running_edges_.size() == 1) {
+    Edge* running_edge = running_edges_.begin()->first;
+    if(last_edge_status_ != running_edge) {
+      PrintStatus(running_edge);
+    }
+  }
+}
+
 void BuildStatus::BuildEdgeFinished(Edge* edge,
                                     bool success,
                                     const string& output,
@@ -117,6 +127,9 @@ void BuildStatus::BuildEdgeFinished(Edge* edge,
 
   if (printer_.is_smart_terminal())
     PrintStatus(edge);
+
+  if (last_edge_status_ == edge)
+    last_edge_status_ = 0;
 
   // Print the command that is spewing before printing its output.
   if (!success)
@@ -249,6 +262,7 @@ void BuildStatus::PrintStatus(Edge* edge) {
 
   printer_.Print(to_print,
                  force_full_command ? LinePrinter::FULL : LinePrinter::ELIDE);
+  last_edge_status_ = edge;
 }
 
 Plan::Plan() : command_edges_(0), wanted_edges_(0) {}
@@ -627,6 +641,8 @@ bool Builder::Build(string* err) {
 
     // See if we can reap any finished commands.
     if (pending_commands) {
+      status_->PrintBuildEdgeStatus();
+
       CommandRunner::Result result;
       if (!command_runner_->WaitForCommand(&result) ||
           result.status == ExitInterrupted) {
